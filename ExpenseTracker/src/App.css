@@ -61,7 +61,7 @@
   gap: 20px;
 }
 
-.greeting {
+.dasboard-title {
   color: #FFFFFF;
   font-size: 2rem;
   text-align: left;
@@ -75,11 +75,22 @@
 }
 
 .chart-card {
-  background-color: #ffffff;
+  background-color: #00000047;
+  border-radius: 12px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  padding: 20px;
+  width: 30%;
+  /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
+  text-align: center;
+}
+
+.full-width-card {
+  background-color: #00000047;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 30%;
+  margin: 15px;
+  width: 97%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
 }
@@ -91,8 +102,43 @@
 
 .chart-title {
   font-size: 1.5rem;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 15px;
 }
 
+.transaction-title {
+  text-align: start;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
 
+.transaction-sub-info {
+  text-align: start;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.transaction-desc {
+  text-align: start;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.main-content {
+  padding-top: 80px;
+}
+
+.card-header{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
