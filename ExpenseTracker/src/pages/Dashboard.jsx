@@ -50,10 +50,10 @@ const Dashboard = () => {
   
 
   const pieData1 = {
-    labels: ['Spend', 'Remaining', "Over Budget"],
+    labels: ["Over Budget",'Spend', 'Remaining'],
     datasets: [
       {
-        data: [totalAverage, remaining, overBudget],
+        data: [overBudget, totalAverage, 100000],
         backgroundColor: ['#4CAF50', '#FFC107', '#2196F3'],
         hoverOffset: 4,
       },
