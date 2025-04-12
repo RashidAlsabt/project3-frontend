@@ -8,11 +8,26 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 const Dashboard = () => {
   const [transactions, setTransactions] = useState([])
+  const [totalAverage, setAverage] = useState(0.0)
+  const [allCategories, setCategories] = useState([])
+  const [allPayments, setPayments] = useState([])
+
+  const generateRandomColor = () => {
+    const letters = '0123456789ABCDEF'
+    let color = '#'
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)]
+    }
+    return color
+  }
 
   async function getTransactions() {
     try {
       const fetchedTransactions = await getAllTransaction()
-      setTransactions(fetchedTransactions)
+      setTransactions(fetchedTransactions.data)
+      setAverage(fetchedTransactions.chartsDetails.totalSpendedAmount)
+      setCategories(fetchedTransactions.chartsDetails.categories)
+      setPayments(fetchedTransactions.chartsDetails.payments)
     } catch (error) {
       console.log(error)
     }
@@ -22,11 +37,23 @@ const Dashboard = () => {
     getTransactions()
   },[])
 
+  let remaining = 0.0
+  let overBudget = 0.0
+  const totalCalculation = 700000 - totalAverage
+
+  if (totalCalculation > 0) {
+    remaining = totalCalculation
+  } else {
+    overBudget = totalCalculation
+  }
+
+  
+
   const pieData1 = {
-    labels: ['Completed', 'Pending', 'In Progress'],
+    labels: ['Spend', 'Remaining', "Over Budget"],
     datasets: [
       {
-        data: [60, 30, 10],
+        data: [totalAverage, remaining, overBudget],
         backgroundColor: ['#4CAF50', '#FFC107', '#2196F3'],
         hoverOffset: 4,
       },
@@ -34,23 +61,23 @@ const Dashboard = () => {
   }
 
   const pieData2 = {
-    labels: ['Success', 'Failure'],
+    labels: allCategories.map(cat => cat.category_name),
     datasets: [
       {
-        data: [85, 30],
-        backgroundColor: ['#4CAF50', '#F44336'],
-        hoverOffset: 4,
+        data: allCategories.map(cat => cat.total),
+        backgroundColor: allCategories.map(() => generateRandomColor()),
+        hoverOffset: allCategories.length,
       },
     ],
   }
 
   const pieData3 = {
-    labels: ['High', 'Medium', 'Low'],
+    labels: allPayments.map(pay => pay.payment_name),
     datasets: [
       {
-        data: [40, 40, 20],
-        backgroundColor: ['#FF5733', '#FFB833', '#DAF7A6'],
-        hoverOffset: 4,
+        data: allPayments.map(pay => pay.count),
+        backgroundColor: allPayments.map(() => generateRandomColor()),
+        hoverOffset: allPayments.length,
       },
     ],
   }
@@ -93,8 +120,9 @@ const Dashboard = () => {
               </div>
             </div>
           )
-  })
-}
+        })
+      }
+      <button className="view-more">View More</button>
     </div>
   )
 }

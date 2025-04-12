@@ -67,6 +67,13 @@
   text-align: left;
 }
 
+.view-more {
+  background: #646cffaa;
+  color: #FFFFFF;
+  font-size: 1rem;
+  text-align: center;
+}
+
 .chart-container {
   display: flex;
   justify-content: space-between;

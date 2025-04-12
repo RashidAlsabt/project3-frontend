@@ -17,8 +17,8 @@ const api = axios.create({
 const getAllTransaction = async () => {
     try {
         const res = await api.get('/1/10'); 
-        console.log('res', res.data.data);
-        return res.data.data;
+        console.log('res', res.data);
+        return res.data;
     } catch (error) {
         console.log('Error fetching data:', error);
     }
