@@ -118,6 +118,11 @@ const Dashboard = () => {
                   <h2 className='transaction-sub-info'>Created at: ${transaction.createdAt}</h2>
                 </div>
               </div>
+              <div className="end-tools-header">
+                  <button>📋</button>
+                  <button>✏️</button>
+                  <button>🗑️</button>
+              </div>
             </div>
           )
         })

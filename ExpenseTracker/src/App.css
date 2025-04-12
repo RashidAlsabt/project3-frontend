@@ -147,5 +147,13 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+}
+
+.end-tools-header{
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0px 0px 0px;
 }
