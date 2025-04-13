@@ -14,9 +14,19 @@ const api = axios.create({
 //       return config;
 //   });
   
-const getAllTransaction = async () => {
+const getAllTransaction = async (page, limit) => {
     try {
-        const res = await api.get('/1/10'); 
+        const res = await api.get(`/${page}/${limit}`); 
+        console.log('res', res.data);
+        return res.data;
+    } catch (error) {
+        console.log('Error fetching data:', error);
+    }
+};
+
+const getGraphDetails = async () => {
+    try {
+        const res = await api.get(`/graph-details`); 
         console.log('res', res.data);
         return res.data;
     } catch (error) {
@@ -56,7 +66,5 @@ const getAllTransaction = async () => {
 
 export { 
     getAllTransaction,
-    // getOneHoot,
-    // deleteHoot,
-    // createHoot
+    getGraphDetails,
 };

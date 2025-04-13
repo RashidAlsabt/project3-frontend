@@ -2,7 +2,8 @@ import React from 'react'
 import { Pie } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { useState, useEffect, useContext } from 'react'
-import { getAllTransaction } from '../service/transactionService'
+import { useNavigate } from 'react-router'
+import { getAllTransaction, getGraphDetails } from '../service/transactionService'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -11,6 +12,8 @@ const Dashboard = () => {
   const [totalAverage, setAverage] = useState(0.0)
   const [allCategories, setCategories] = useState([])
   const [allPayments, setPayments] = useState([])
+
+  const navigate = useNavigate()
 
   const generateRandomColor = () => {
     const letters = '0123456789ABCDEF'
@@ -23,17 +26,26 @@ const Dashboard = () => {
 
   async function getTransactions() {
     try {
-      const fetchedTransactions = await getAllTransaction()
+      const fetchedTransactions = await getAllTransaction(1, 5)
       setTransactions(fetchedTransactions.data)
-      setAverage(fetchedTransactions.chartsDetails.totalSpendedAmount)
-      setCategories(fetchedTransactions.chartsDetails.categories)
-      setPayments(fetchedTransactions.chartsDetails.payments)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function getGraphs() {
+    try {
+      const fetchedGraphss = await getGraphDetails()
+      setAverage(fetchedGraphss.chartsDetails.totalSpendedAmount)
+      setCategories(fetchedGraphss.chartsDetails.categories)
+      setPayments(fetchedGraphss.chartsDetails.payments)
     } catch (error) {
       console.log(error)
     }
   }
 
   useEffect(()=>{
+    getGraphs()
     getTransactions()
   },[])
 
@@ -53,7 +65,7 @@ const Dashboard = () => {
     labels: ["Over Budget",'Spend', 'Remaining'],
     datasets: [
       {
-        data: [overBudget, totalAverage, 100000],
+        data: [overBudget, totalAverage, remaining],
         backgroundColor: ['#4CAF50', '#FFC107', '#2196F3'],
         hoverOffset: 4,
       },
@@ -127,7 +139,7 @@ const Dashboard = () => {
           )
         })
       }
-      <button className="view-more">View More</button>
+      <button className="view-more" onClick={() => {navigate('/transactions')}}>View More</button>
     </div>
   )
 }
