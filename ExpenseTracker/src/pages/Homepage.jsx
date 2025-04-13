@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router'
 import { authContext } from '../context/AuthContext'
 import './Homepage.css'
 import defaultLogo from '../assets/default_transparent_765x625.png'
@@ -13,7 +13,7 @@ function Homepage() {
     if (user) {
       navigate('/dashboard')
     }
-  }, [user, navigate])
+  }, [user, navigate('/')])
 
   return (
     <div className="homepage">
