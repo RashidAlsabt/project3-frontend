@@ -65,7 +65,7 @@ function Transactions() {
 
   return (
     <div className='main-content'>
-      <h5 className="dasboard-title">All Transactions</h5>
+      <h5 className="dashboard-title">All Transactions</h5>
       {list.map((transaction) => (
         <div className="full-width-card" key={transaction._id}>
           <div>

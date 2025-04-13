@@ -96,7 +96,7 @@ const Dashboard = () => {
 
   return (
     <div className='main-content'>
-      <h5 className="dasboard-title">Estimated Budget : $100,000</h5>
+      <h5 className="dashboard-title">Estimated Budget : $100,000</h5>
 
       <div className="chart-container">
         <div className="chart-card">
@@ -114,7 +114,7 @@ const Dashboard = () => {
           <Pie data={pieData3} options={{responsive: true, plugins: {legend: {position: 'bottom'}, tooltip: {enabled: true}}}}/>
         </div>
       </div>
-      <h5 className='dasboard-title'>Transactions</h5>
+      <h5 className='dashboard-title'>Transactions</h5>
       {
         transactions.map((transaction) => {
           return (
