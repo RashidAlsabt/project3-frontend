@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { getAllTransaction } from '../service/transactionService'
+import { useNavigate } from 'react-router'
 
 function Transactions() {
   const [list, setList] = useState([])
@@ -8,6 +9,7 @@ function Transactions() {
   const page = useRef(1)
   const seen = useRef(new Set())
   const limit = 10
+  const navigate = useNavigate()
 
   const loadMore = useCallback(async () => {
     if (loading || done) return
@@ -78,8 +80,9 @@ function Transactions() {
             </div>
           </div>
           <div className="end-tools-header">
-            <button>📋</button>
-            <button>✏️</button>
+            <button onClick={() => {
+              navigate(`/transaction/${transaction._id}/edit`)
+            }} >✏️</button>
             <button>🗑️</button>
           </div>
         </div>

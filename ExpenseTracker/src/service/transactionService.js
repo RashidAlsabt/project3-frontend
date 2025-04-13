@@ -34,7 +34,14 @@ const getGraphDetails = async () => {
     }
 };
 
-
+const getOneTransaction = async (id) => {
+    try {
+        const res = await api.get(`/${id}`); 
+        return res.data;
+    } catch (error) {
+        console.log('Error fetching data:', error);
+    }
+};
     
 //   const getOneHoot = async (id) => {
 //     try {
@@ -67,4 +74,5 @@ const getGraphDetails = async () => {
 export { 
     getAllTransaction,
     getGraphDetails,
+    getOneTransaction,
 };

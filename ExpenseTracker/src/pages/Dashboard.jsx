@@ -131,7 +131,6 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className="end-tools-header">
-                  <button>📋</button>
                   <button>✏️</button>
                   <button>🗑️</button>
               </div>
