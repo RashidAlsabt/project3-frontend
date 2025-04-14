@@ -68,4 +68,5 @@ export {
     createCategory,
     createPayment,
     deleteCategory,
+    deletePayment,
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { createCategory, createPayment, deleteCategory, getAllCategories, getAllPayments } from '../service/customizationService'
+import { createCategory, createPayment, deleteCategory, deletePayment, getAllCategories, getAllPayments } from '../service/customizationService'
 import '../App.css'
 
 function Customization() {
@@ -46,7 +46,7 @@ function Customization() {
 
     const handleDeletePayment = async (id) => {
         try {
-          await deleteCategory(id)
+          await deletePayment(id)
           setPayments(prevList => prevList.filter(payment => payment._id !== id))
         } catch (err) {
           console.log('Error:', err)
