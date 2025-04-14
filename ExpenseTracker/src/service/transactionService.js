@@ -53,10 +53,20 @@ const deleteTrasnaction = async (id) => {
     }
 }
 
+const createTrasnaction = async (data) => {
+    try {
+        const res = await api.post(`/`, data);
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export { 
     getAllTransaction,
     getGraphDetails,
     getOneTransaction,
     updateTransaction,
     deleteTrasnaction,
+    createTrasnaction,
 };

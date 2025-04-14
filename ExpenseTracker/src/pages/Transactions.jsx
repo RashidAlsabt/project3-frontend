@@ -74,6 +74,7 @@ function Transactions() {
   return (
     <div className='main-content'>
       <h5 className="dashboard-title">All Transactions</h5>
+      <button className="view-more" onClick={() => {navigate('/transaction/create')}}>Add Transaction</button>
       {list.map((transaction) => (
         <div className="full-width-card" key={transaction._id}>
           <div>

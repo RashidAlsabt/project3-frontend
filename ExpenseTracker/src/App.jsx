@@ -7,6 +7,7 @@ import './App.css'
 import Dashboard from './pages/Dashboard'
 import Transactions from './pages/Transactions'
 import EditTransaction from './pages/EditTransaction'
+import CreateTransaction from './pages/CreateTransaction'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/transactions" element={<Transactions/>}/>
         <Route path="/transaction/:transactionId/edit" element={<EditTransaction/>}/>
+        <Route path="/transaction/create" element={<CreateTransaction/>}/>
       </Routes>
     </>
   )
