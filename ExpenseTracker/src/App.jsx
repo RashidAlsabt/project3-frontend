@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard'
 import Transactions from './pages/Transactions'
 import EditTransaction from './pages/EditTransaction'
 import CreateTransaction from './pages/CreateTransaction'
+import Customization from './pages/Customization'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/transactions" element={<Transactions/>}/>
         <Route path="/transaction/:transactionId/edit" element={<EditTransaction/>}/>
         <Route path="/transaction/create" element={<CreateTransaction/>}/>
+        <Route path="/customization" element={<Customization/>}/>
       </Routes>
     </>
   )

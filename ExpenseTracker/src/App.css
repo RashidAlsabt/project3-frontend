@@ -196,3 +196,28 @@ label {
   border-radius: 6px;
   resize: vertical;
 }
+
+.card-header-evenly{
+  display: flex;
+  justify-content: space-evenly;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.left-column,
+.right-column {
+  margin-bottom: 20px;
+  width: 42%;
+  flex-direction: row;
+}
+
+.full-width-card-custom {
+  background-color: #00000047;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 15px 0px;
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}

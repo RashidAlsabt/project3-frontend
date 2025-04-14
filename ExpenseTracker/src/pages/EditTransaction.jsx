@@ -68,8 +68,6 @@ function EditTransaction() {
 
         try{
 
-       
-
             const requestData = {
                 company_id: "67f540aba3cdafd584c3b51f",
                 category_id: formData.category_id,

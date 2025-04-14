@@ -26,9 +26,27 @@ const getAllCategories = async () => {
     }
 };
 
+const createCategory = async (data) => {
+    try {
+        const res = await api.post(`/category/`, data);
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
 
+const createPayment = async (data) => {
+    try {
+        const res = await api.post(`/payment/`, data);
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export { 
     getAllCategories,
-    getAllPayments
+    getAllPayments,
+    createCategory,
+    createPayment,
 };
