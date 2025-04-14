@@ -131,7 +131,9 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className="end-tools-header">
-                  <button>✏️</button>
+                  <button onClick={() => {
+                    navigate(`/transaction/${transaction._id}/edit`)
+                  }}>✏️</button>
                   <button>🗑️</button>
               </div>
             </div>

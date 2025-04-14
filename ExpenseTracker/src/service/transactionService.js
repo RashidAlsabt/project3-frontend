@@ -6,14 +6,6 @@ const api = axios.create({
     baseURL: BASE_URL 
 });
   
-//   api.interceptors.request.use(config => {
-//       const token = localStorage.getItem('token');
-//       if (token) {
-//           config.headers.Authorization = `Bearer ${token}`;
-//       }
-//       return config;
-//   });
-  
 const getAllTransaction = async (page, limit) => {
     try {
         const res = await api.get(`/${page}/${limit}`); 
@@ -42,37 +34,29 @@ const getOneTransaction = async (id) => {
         console.log('Error fetching data:', error);
     }
 };
-    
-//   const getOneHoot = async (id) => {
-//     try {
-//         const res = await api.get(`/${id}`); 
-//         return res.data;
-//     } catch (error) {
-//         console.log('Error fetching data:', error);
-//     }
-// };
 
-// async function deleteHoot(id){
-//     try{
-//         const res = await api.delete(`/${id}`)
-//         return res.data
-//     }catch(err){
-//         console.log(err)
-//     }
-// }
+const updateTransaction = async (id, data) => {
+    try {
+        const res = await api.put(`/${id}`, data);
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-// async function createHoot(formData){
-//     try{
-//         const res = await api.post(`/`,formData)
-//         return res.data
-//     }catch(err){
-//         console.log(err)
-//     }
-// }
-  
+const deleteTrasnaction = async (id) => {
+    try {
+        const res = await api.delete(`/${id}`);
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export { 
     getAllTransaction,
     getGraphDetails,
     getOneTransaction,
+    updateTransaction,
+    deleteTrasnaction,
 };
