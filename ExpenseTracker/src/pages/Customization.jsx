@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { createCategory, createPayment, getAllCategories, getAllPayments } from '../service/customizationService'
+import { createCategory, createPayment, deleteCategory, getAllCategories, getAllPayments } from '../service/customizationService'
 import '../App.css'
 
 function Customization() {
@@ -32,6 +32,24 @@ function Customization() {
             setPayments(fetchPayments)
         } catch (error) {
             console.log("Error fetching payments:", error)
+        }
+    }
+
+    const handleDeleteCategory = async (id) => {
+        try {
+          await deleteCategory(id)
+          setCategories(prevList => prevList.filter(category => category._id !== id))
+        } catch (err) {
+          console.log('Error:', err)
+        }
+    }
+
+    const handleDeletePayment = async (id) => {
+        try {
+          await deleteCategory(id)
+          setPayments(prevList => prevList.filter(payment => payment._id !== id))
+        } catch (err) {
+          console.log('Error:', err)
         }
     }
 
@@ -106,7 +124,7 @@ function Customization() {
                                 <div className="card-header">
                                     <h3 className="transaction-title">{category.name}</h3>
                                     <div className="end-tools-header-custom">
-                                        <button>🗑️</button>
+                                        <button onClick={() => handleDeleteCategory(category._id)}>🗑️</button>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +164,7 @@ function Customization() {
                                 <div className="card-header">
                                     <h3 className="transaction-title">{payment.name}</h3>
                                     <div className="end-tools-header-custom">
-                                        <button>🗑️</button>
+                                        <button onClick={() => handleDeletePayment(payment._id)}>🗑️</button>
                                     </div>
                                 </div>
                             </div>

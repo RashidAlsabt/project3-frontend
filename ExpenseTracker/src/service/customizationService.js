@@ -44,9 +44,28 @@ const createPayment = async (data) => {
     }
 }
 
+const deleteCategory = async (id) => {
+    try {
+        const res = await api.delete(`/category/${id}`);
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const deletePayment = async (id) => {
+    try {
+        const res = await api.delete(`/payment/${id}`);
+        return res.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export { 
     getAllCategories,
     getAllPayments,
     createCategory,
     createPayment,
+    deleteCategory,
 };
