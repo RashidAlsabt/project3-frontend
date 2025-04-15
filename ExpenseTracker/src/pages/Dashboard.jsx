@@ -103,7 +103,7 @@ const Dashboard = () => {
 
         <div className="chart-container">
           <div className="chart-card">
-            <h3 className="chart-title">Pie Chart 1</h3>
+            <h3 className="chart-title">Budget</h3>
             <Pie
               data={pieData1}
               options={{
@@ -117,7 +117,7 @@ const Dashboard = () => {
           </div>
 
           <div className="chart-card">
-            <h3 className="chart-title">Pie Chart 2</h3>
+            <h3 className="chart-title">Category</h3>
             <Pie
               data={pieData2}
               options={{
@@ -131,7 +131,7 @@ const Dashboard = () => {
           </div>
 
           <div className="chart-card">
-            <h3 className="chart-title">Pie Chart 3</h3>
+            <h3 className="chart-title">Payment</h3>
             <Pie
               data={pieData3}
               options={{
