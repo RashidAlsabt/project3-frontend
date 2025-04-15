@@ -57,7 +57,7 @@
 
 .dashboard-content {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   gap: 20px;
 }
 
@@ -220,4 +220,16 @@ label {
   width: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
+}
+
+.end-tools-header-custom{
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.logo-image {
+  height: 85px; /* Adjust as needed */
+  width: 85x;
 }

@@ -12,6 +12,7 @@ function UserProvider(props){
 
 
     const navigate = useNavigate()
+
     async function validateToken(){
         // first get the token from localStorage
         const token = localStorage.getItem("token")
@@ -22,8 +23,9 @@ function UserProvider(props){
             try{
 
                 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/auth/verify`,{headers:{Authorization:`Bearer ${token}`}})
-                console.log(response.data)
-                setUser(response.data)    
+                console.log(response.data.payload)
+                setUser(response.data.payload)    
+                localStorage.getItem("user")
             }
             // second condition if the token is not valid
             catch(err){
@@ -36,6 +38,7 @@ function UserProvider(props){
         // third condition if there is no token in localstorage
         else{
             setUser(null)
+            navigate('/')
         }
     }
 
@@ -43,7 +46,7 @@ function UserProvider(props){
 
         localStorage.removeItem("token")
         validateToken()
-        navigate("/login")
+        navigate("/")
     }
 
     useEffect(()=>{

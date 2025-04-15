@@ -5,10 +5,12 @@ const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}`;
 const api = axios.create({
     baseURL: BASE_URL 
 });
+
+const token = localStorage.getItem("token")
   
 const getAllPayments = async () => {
     try {
-        const res = await api.get(`/payment`); 
+        const res = await api.get(`/payment`, {headers:{Authorization:`Bearer ${token}`}}); 
         console.log('res', res.data);
         return res.data;
     } catch (error) {
@@ -18,7 +20,7 @@ const getAllPayments = async () => {
   
 const getAllCategories = async () => {
     try {
-        const res = await api.get(`/category`); 
+        const res = await api.get(`/category`, {headers:{Authorization:`Bearer ${token}`}}); 
         console.log('res', res.data);
         return res.data;
     } catch (error) {
@@ -28,7 +30,7 @@ const getAllCategories = async () => {
 
 const createCategory = async (data) => {
     try {
-        const res = await api.post(`/category/`, data);
+        const res = await api.post(`/category/`, data, {headers:{Authorization:`Bearer ${token}`}});
         return res.data;
     } catch (error) {
         console.log(error)
@@ -37,7 +39,7 @@ const createCategory = async (data) => {
 
 const createPayment = async (data) => {
     try {
-        const res = await api.post(`/payment/`, data);
+        const res = await api.post(`/payment/`, data, {headers:{Authorization:`Bearer ${token}`}});
         return res.data;
     } catch (error) {
         console.log(error)
@@ -46,7 +48,7 @@ const createPayment = async (data) => {
 
 const deleteCategory = async (id) => {
     try {
-        const res = await api.delete(`/category/${id}`);
+        const res = await api.delete(`/category/${id}`, {headers:{Authorization:`Bearer ${token}`}});
         return res.data;
     } catch (error) {
         console.log(error)
@@ -55,7 +57,7 @@ const deleteCategory = async (id) => {
 
 const deletePayment = async (id) => {
     try {
-        const res = await api.delete(`/payment/${id}`);
+        const res = await api.delete(`/payment/${id}`, {headers:{Authorization:`Bearer ${token}`}});
         return res.data;
     } catch (error) {
         console.log(error)

@@ -16,21 +16,9 @@ function Homepage() {
   }, [user, navigate('/')])
 
   return (
-    <div className="homepage">
-      <nav className="navbar">
-        <div className="navbar-left">
-          <img src={svgLogo} alt="Logo" className="logo" />
-          <span className="brand">SpeckTrack</span>
-        </div>
-        {!user && (
-          <div className="navbar-right">
-            <Link to="/signin" className="link">Sign In</Link>
-            <Link to="/signup" className="signup-button">Sign Up</Link>
-          </div>
-        )}
-      </nav>
-      <main className="main-logo-section">
-        <img src={defaultLogo} alt="Main Logo" className="main-centered-logo" />
+    <div>
+      <main>
+        <img src={defaultLogo} alt="Main Logo"/>
       </main>
     </div>
   )
