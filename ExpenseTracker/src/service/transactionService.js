@@ -39,7 +39,7 @@ const getOneTransaction = async (id) => {
 
 const updateTransaction = async (id, data) => {
     try {
-        const res = await api.put(`/${id}`, data);
+        const res = await api.put(`/${id}`, data, {headers:{Authorization:`Bearer ${token}`}});
         return res.data;
     } catch (error) {
         console.log(error)
