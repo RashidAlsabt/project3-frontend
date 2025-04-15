@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { getAllTransaction } from '../service/transactionService'
+import { deleteTrasnaction, getAllTransaction } from '../service/transactionService'
+import { useNavigate } from 'react-router'
 
 function Transactions() {
   const [list, setList] = useState([])
@@ -8,7 +9,7 @@ function Transactions() {
   const page = useRef(1)
   const seen = useRef(new Set())
   const limit = 10
-
+  const navigate = useNavigate()
   const loadMore = useCallback(async () => {
     if (loading || done) return
     setLoading(true)
@@ -61,9 +62,19 @@ function Transactions() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [loadMore])
 
+  const handleDelete = async (transactionId) => {
+    try {
+      await deleteTrasnaction(transactionId)
+      setList(prevList => prevList.filter(transaction => transaction._id !== transactionId))
+    } catch (err) {
+      console.log('Error:', err)
+    }
+  }
+
   return (
     <div className='main-content'>
-      <h5 className="dasboard-title">All Transactions</h5>
+      <h5 className="dashboard-title">All Transactions</h5>
+      <button className="view-more" onClick={() => {navigate('/transaction/create')}}>Add Transaction</button>
       {list.map((transaction) => (
         <div className="full-width-card" key={transaction._id}>
           <div>
@@ -78,9 +89,10 @@ function Transactions() {
             </div>
           </div>
           <div className="end-tools-header">
-            <button>📋</button>
-            <button>✏️</button>
-            <button>🗑️</button>
+            <button onClick={() => {
+              navigate(`/transaction/${transaction._id}/edit`)
+            }} >✏️</button>
+            <button onClick={() => handleDelete(transaction._id)}>🗑️</button>
           </div>
         </div>
       ))}

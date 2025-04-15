@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Pie } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { getAllTransaction, getGraphDetails } from '../service/transactionService'
+import { authContext } from '../context/AuthContext'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 const Dashboard = () => {
+  const { user } = useContext(authContext)
+
   const [transactions, setTransactions] = useState([])
   const [totalAverage, setAverage] = useState(0.0)
   const [allCategories, setCategories] = useState([])
@@ -44,14 +46,16 @@ const Dashboard = () => {
     }
   }
 
-  useEffect(()=>{
-    getGraphs()
-    getTransactions()
-  },[])
+  useEffect(() => {
+    if (user) {
+      getGraphs()
+      getTransactions()
+    }
+  }, [user])
 
   let remaining = 0.0
   let overBudget = 0.0
-  const totalCalculation = 700000 - totalAverage
+  const totalCalculation = (user?.salary || 0) - totalAverage
 
   if (totalCalculation > 0) {
     remaining = totalCalculation
@@ -59,10 +63,8 @@ const Dashboard = () => {
     overBudget = totalCalculation
   }
 
-  
-
   const pieData1 = {
-    labels: ["Over Budget",'Spend', 'Remaining'],
+    labels: ['Over Budget', 'Spend', 'Remaining'],
     datasets: [
       {
         data: [overBudget, totalAverage, remaining],
@@ -95,28 +97,56 @@ const Dashboard = () => {
   }
 
   return (
-    <div className='main-content'>
-      <h5 className="dasboard-title">Estimated Budget : $100,000</h5>
+    user && (
+      <div className='main-content'>
+        <h5 className="dashboard-title">Estimated Budget : ${user.salary}</h5>
 
-      <div className="chart-container">
-        <div className="chart-card">
-          <h3 className="chart-title">Pie Chart 1</h3>
-          <Pie data={pieData1} options={{responsive: true, plugins: {legend: {position: 'bottom'}, tooltip: {enabled: true}}}} />
+        <div className="chart-container">
+          <div className="chart-card">
+            <h3 className="chart-title">Pie Chart 1</h3>
+            <Pie
+              data={pieData1}
+              options={{
+                responsive: true,
+                plugins: {
+                  legend: { position: 'bottom' },
+                  tooltip: { enabled: true },
+                },
+              }}
+            />
+          </div>
+
+          <div className="chart-card">
+            <h3 className="chart-title">Pie Chart 2</h3>
+            <Pie
+              data={pieData2}
+              options={{
+                responsive: true,
+                plugins: {
+                  legend: { position: 'bottom' },
+                  tooltip: { enabled: true },
+                },
+              }}
+            />
+          </div>
+
+          <div className="chart-card">
+            <h3 className="chart-title">Pie Chart 3</h3>
+            <Pie
+              data={pieData3}
+              options={{
+                responsive: true,
+                plugins: {
+                  legend: { position: 'bottom' },
+                  tooltip: { enabled: true },
+                },
+              }}
+            />
+          </div>
         </div>
 
-        <div className="chart-card">
-          <h3 className="chart-title">Pie Chart 2</h3>
-          <Pie data={pieData2} options={{responsive: true, plugins: {legend: {position: 'bottom'}, tooltip: {enabled: true}}}}/>
-        </div>
-
-        <div className="chart-card">
-          <h3 className="chart-title">Pie Chart 3</h3>
-          <Pie data={pieData3} options={{responsive: true, plugins: {legend: {position: 'bottom'}, tooltip: {enabled: true}}}}/>
-        </div>
-      </div>
-      <h5 className='dasboard-title'>Transactions</h5>
-      {
-        transactions.map((transaction) => {
+        <h5 className='dashboard-title'>Transactions</h5>
+        {transactions.map(transaction => {
           return (
             <div className="full-width-card" key={transaction._id}>
               <div>
@@ -131,16 +161,23 @@ const Dashboard = () => {
                 </div>
               </div>
               <div className="end-tools-header">
-                  <button>📋</button>
-                  <button>✏️</button>
-                  <button>🗑️</button>
+                <button
+                  onClick={() => {
+                    navigate(`/transaction/${transaction._id}/edit`)
+                  }}
+                >
+                  ✏️
+                </button>
+                <button>🗑️</button>
               </div>
             </div>
           )
-        })
-      }
-      <button className="view-more" onClick={() => {navigate('/transactions')}}>View More</button>
-    </div>
+        })}
+        <button className="view-more" onClick={() => navigate('/transactions')}>
+          View More
+        </button>
+      </div>
+    )
   )
 }
 
