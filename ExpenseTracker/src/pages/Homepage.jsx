@@ -16,7 +16,7 @@ function Homepage() {
   }, [user, navigate('/')])
 
   return (
-    <div>
+    <div className='main-content'>
       <main>
         <img src={defaultLogo} alt="Main Logo"/>
       </main>

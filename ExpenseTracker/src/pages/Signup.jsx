@@ -58,7 +58,7 @@ function Signup() {
         <input
           name="salary"
           type="number"
-          placeholder="Salary (optional)"
+          placeholder="Budget"
           onChange={handleChange}
         />
         <button type="submit">Sign Up</button>
