@@ -22,8 +22,9 @@ function Signin() {
     try {
       const res = await login(formData)
       localStorage.setItem('token', res.data.token)
-      validateToken()
+      validateToken()      
       navigate('/dashboard')
+      window.location.reload()
     } catch (err) {
       setError(err.response?.data?.err || 'Login failed')
     }
